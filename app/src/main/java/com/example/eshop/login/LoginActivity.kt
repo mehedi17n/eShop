@@ -2,9 +2,11 @@ package com.example.eshop.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var tvSignUp: TextView
+    private lateinit var eyeIcon: ImageView
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +47,15 @@ class LoginActivity : AppCompatActivity() {
         passwordEditText = findViewById(R.id.etPasswordLogin)
         loginButton = findViewById(R.id.loginButton)
         tvSignUp = findViewById(R.id.tvSignup)
+        eyeIcon = findViewById(R.id.eyeIcon)
 
         tvSignUp.setOnClickListener {
-            // Navigate to RegisterActivity when the TextView is clicked
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+        }
+
+        eyeIcon.setOnClickListener {
+            togglePasswordVisibility()
         }
 
         loginButton.setOnClickListener {
@@ -71,6 +79,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // Set the password to hidden
+            passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            eyeIcon.setImageResource(R.drawable.ic_eye)
+        } else {
+            // Set the password to visible
+            passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            eyeIcon.setImageResource(R.drawable.ic_eye_off)
+        }
+        // Move cursor to the end of the text
+        passwordEditText.setSelection(passwordEditText.text.length)
+        isPasswordVisible = !isPasswordVisible
     }
 
     private fun loginUser() {

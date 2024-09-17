@@ -2,9 +2,11 @@ package com.example.eshop.registation
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var registerButton: Button
     private lateinit var tvSignIn: TextView
+    private lateinit var eyeIcon: ImageView
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +49,15 @@ class RegisterActivity : AppCompatActivity() {
         passwordEditText = findViewById(R.id.etPassword)
         registerButton = findViewById(R.id.loginButton)
         tvSignIn = findViewById(R.id.tvSignin)
+        eyeIcon = findViewById(R.id.eyeIcon)
 
         tvSignIn.setOnClickListener {
-            // Navigate to LoginActivity when the TextView is clicked
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        eyeIcon.setOnClickListener {
+            togglePasswordVisibility()
         }
 
         registerButton.setOnClickListener {
@@ -73,6 +81,21 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // Set the password to hidden
+            passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            eyeIcon.setImageResource(R.drawable.ic_eye)
+        } else {
+            // Set the password to visible
+            passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            eyeIcon.setImageResource(R.drawable.ic_eye_off)
+        }
+        // Move cursor to the end of the text
+        passwordEditText.setSelection(passwordEditText.text.length)
+        isPasswordVisible = !isPasswordVisible
     }
 
     private fun registerUser() {
