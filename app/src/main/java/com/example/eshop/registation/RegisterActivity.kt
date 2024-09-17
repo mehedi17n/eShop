@@ -2,6 +2,7 @@ package com.example.eshop.registation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -33,7 +34,6 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
         // Initialize ViewModel
@@ -77,16 +77,43 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        val name = nameEditText.text.toString()
-        val phone = phoneEditText.text.toString()
-        val email = emailEditText.text.toString()
-        val password = passwordEditText.text.toString()
+        val name = nameEditText.text.toString().trim()
+        val phone = phoneEditText.text.toString().trim()
+        val email = emailEditText.text.toString().trim()
+        val password = passwordEditText.text.toString().trim()
 
-        if (name.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+        // Validate inputs
+        if (!isValidName(name)) {
+            Toast.makeText(this, "Please enter a valid name", Toast.LENGTH_SHORT).show()
+        } else if (!isValidPhone(phone)) {
+            Toast.makeText(this, "Phone number must start with '1'", Toast.LENGTH_SHORT).show()
+        } else if (!isValidEmail(email)) {
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+        } else if (!isValidPassword(password)) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+        } else {
+            // If validation is successful, create the register request
             val registerRequest = RegisterRequest(name, phone, email, password)
             registerViewModel.registerUser(registerRequest)
-        } else {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun isValidName(name: String): Boolean {
+        return name.isNotEmpty()
+    }
+
+    private fun isValidPhone(phone: String): Boolean {
+        // Phone number must start with '1' and be exactly 10 digits
+        return phone.startsWith("1") && phone.length == 10
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        // Check if the email is valid using Android's Patterns utility
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        // Password must be at least 6 characters long
+        return password.length >= 6
     }
 }
