@@ -6,11 +6,7 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.eshop.R
@@ -18,7 +14,7 @@ import com.example.eshop.RegisterViewModel
 import com.example.eshop.RegisterViewModelFactory
 import com.example.eshop.api.ApiClient
 import com.example.eshop.api.Resource
-import com.example.eshop.data.RegisterRequest
+import com.example.eshop.data.register.RegisterRequest
 import com.example.eshop.login.LoginActivity
 import com.example.eshop.repository.UserRepository
 import kotlinx.coroutines.launch

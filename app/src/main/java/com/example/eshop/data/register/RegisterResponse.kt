@@ -1,4 +1,4 @@
-package com.example.eshop.data
+package com.example.eshop.data.register
 
 data class RegisterResponse(
     val status: Int,

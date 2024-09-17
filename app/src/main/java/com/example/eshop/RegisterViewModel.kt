@@ -1,11 +1,10 @@
 package com.example.eshop
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eshop.api.Resource
-import com.example.eshop.data.RegisterRequest
-import com.example.eshop.data.RegisterResponse
+import com.example.eshop.data.register.RegisterRequest
+import com.example.eshop.data.register.RegisterResponse
 import com.example.eshop.repository.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

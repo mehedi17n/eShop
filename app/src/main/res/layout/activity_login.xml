@@ -26,7 +26,7 @@
         android:fontFamily="@font/inter_light_beta" />
 
     <EditText
-        android:id="@+id/emailEdittext"
+        android:id="@+id/etEmailLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -45,7 +45,7 @@
         android:layout_height="50dp">
 
         <EditText
-            android:id="@+id/passwordEdittext"
+            android:id="@+id/etPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:inputType="textPassword"
@@ -83,6 +83,7 @@
 
 
     <TextView
+        android:id="@+id/tvSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"

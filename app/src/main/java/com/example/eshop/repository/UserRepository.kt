@@ -2,14 +2,13 @@ package com.example.eshop.repository
 
 import android.util.Log
 import com.example.eshop.api.Resource
-import com.example.eshop.data.RegisterRequest
-import com.example.eshop.data.RegisterResponse
+import com.example.eshop.data.register.RegisterRequest
+import com.example.eshop.data.register.RegisterResponse
 import com.example.eshop.service.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 
 class UserRepository(private val apiService: ApiService) {
 
