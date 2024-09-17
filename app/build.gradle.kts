@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -36,6 +37,24 @@ android {
 }
 
 dependencies {
+
+    // For network requests
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
+    // For coroutines
+    implementation (libs.kotlinx.coroutines.android)
+
+    // For ViewModel and LiveData
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+
+    implementation(libs.coil)
+    implementation(libs.androidx.datastore.preferences)
+    implementation (libs.lottie)
+    implementation (libs.shimmer)
+    implementation(libs.dotsindicator)
+    implementation (libs.androidx.viewpager2)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
