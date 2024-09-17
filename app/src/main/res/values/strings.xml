@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">eShop</string>
+
+    <string name="sign_up_text">Don’t have an account? <b><font color='#17BABD'>Sign Up</font></b></string>
+    <string name="sign_in_text">Have an account? <b><font color='#17BABD'>Sign In</font></b></string>
+</resources>
