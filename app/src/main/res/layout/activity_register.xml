@@ -140,11 +140,12 @@
 
     <!-- Sign In Text -->
     <TextView
+        android:id="@+id/tvSignin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:padding="20dp"
-        android:gravity="center"
         android:fontFamily="@font/inter_regular"
+        android:gravity="center"
+        android:padding="20dp"
         android:text="@string/sign_in_text" />
 </LinearLayout>

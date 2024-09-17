@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.eshop.R
-import com.example.eshop.RegisterViewModel
-import com.example.eshop.RegisterViewModelFactory
+import com.example.eshop.viewModel.RegisterViewModel
+import com.example.eshop.viewModel.RegisterViewModelFactory
 import com.example.eshop.api.ApiClient
 import com.example.eshop.api.Resource
 import com.example.eshop.data.register.RegisterRequest
@@ -27,6 +28,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var registerButton: Button
+    private lateinit var tvSignIn: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,13 @@ class RegisterActivity : AppCompatActivity() {
         emailEditText = findViewById(R.id.etEmail)
         passwordEditText = findViewById(R.id.etPassword)
         registerButton = findViewById(R.id.loginButton)
+        tvSignIn = findViewById(R.id.tvSignin)
+
+        tvSignIn.setOnClickListener {
+            // Navigate to LoginActivity when the TextView is clicked
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         registerButton.setOnClickListener {
             registerUser()
