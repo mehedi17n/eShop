@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        registerButton = findViewById(R.id.registerButton) // Ensure you have this button in your layout
-
-        registerButton.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
+//        registerButton = findViewById(R.id.registerButton)
+//
+//        registerButton.setOnClickListener {
+//            startActivity(Intent(this, RegisterActivity::class.java))
+//        }
     }
 }

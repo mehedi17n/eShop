@@ -3,4 +3,8 @@
 
     <string name="sign_up_text">Don’t have an account? <b><font color='#17BABD'>Sign Up</font></b></string>
     <string name="sign_in_text">Have an account? <b><font color='#17BABD'>Sign In</font></b></string>
+
+    <string name="welcome_title"> The <b><font color='#17BABD'>Fashion App</font></b> That Makes You Look Your Best </string>
+    <string name="welcome_text">With <b><font color='#17BABD'>eShop</font></b> you will find new cloths from various countries and regions of the world</string>
+
 </resources>

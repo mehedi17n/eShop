@@ -1,15 +1,14 @@
-package com.example.eshop
+package com.example.eshop.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.eshop.repository.UserRepository
 
-class RegisterViewModelFactory(private val repository: UserRepository) : ViewModelProvider.Factory {
-
+class LoginViewModelFactory(private val repository: UserRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return RegisterViewModel(repository) as T
+            return LoginViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
