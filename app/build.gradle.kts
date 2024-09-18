@@ -49,8 +49,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation (libs.androidx.lifecycle.livedata.ktx)
 
-    implementation(libs.coil)
+    //Data store
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.security.crypto.datastore.preferences)
+    implementation(libs.androidx.security.crypto.ktx)
+
+    implementation(libs.coil)
     implementation (libs.lottie)
     implementation (libs.shimmer)
     implementation(libs.dotsindicator)
