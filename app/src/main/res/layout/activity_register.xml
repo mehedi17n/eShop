@@ -1,149 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="20dp"
-    tools:context=".registration.RegisterActivity">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:padding="10dp"
-        android:layout_marginTop="-30dp"
-        android:src="@drawable/signup_pic" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="-10dp"
-        android:text="Sign Up"
-        android:fontFamily="@font/inter_semi_bold"
-        android:layout_gravity="center" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Hi! Welcome back, you've been missed"
-        android:fontFamily="@font/inter_light_beta"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp" />
-
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_border_selector"
-        android:hint="Full Name"
-        android:fontFamily="@font/inter_regular"
-        android:maxLength="20"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:focusable="true" />
+    android:fillViewport="true">
 
     <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@drawable/edittext_border_selector">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        tools:context=".registration.RegisterActivity">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_bangladesh"
-            android:layout_marginEnd="8dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:padding="10dp"
+            android:layout_marginTop="-30dp"
+            android:src="@drawable/signup_pic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+880"
+            android:textSize="20sp"
+            android:layout_marginTop="-10dp"
+            android:text="Sign Up"
+            android:fontFamily="@font/inter_semi_bold"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:fontFamily="@font/inter_regular"
-            android:layout_marginEnd="8dp" />
+            android:text="Hi! Welcome back, you've been missed"
+            android:fontFamily="@font/inter_light_beta"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp" />
 
         <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="phone"
-            android:hint="Phone Number"
-            android:maxLength="10"
-            android:background="@android:color/transparent"
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_border_selector"
+            android:hint="Full Name"
             android:fontFamily="@font/inter_regular"
+            android:maxLength="20"
             android:maxLines="1"
             android:ellipsize="end"
             android:focusable="true" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/edittext_border_selector">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_bangladesh"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+880"
+                android:textSize="16sp"
+                android:fontFamily="@font/inter_regular"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:hint="Phone Number"
+                android:maxLength="10"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/inter_regular"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_border_selector"
+            android:hint="Email Address"
+            android:fontFamily="@font/inter_regular"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:focusable="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:hint="Enter Password"
+                android:background="@drawable/edittext_border_selector"
+                android:fontFamily="@font/inter_regular"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:focusable="true" />
+
+            <ImageView
+                android:id="@+id/eyeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_eye"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="16dp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="Sign Up"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_semi_bold"
+            android:background="@drawable/button_color" />
+
+        <TextView
+            android:id="@+id/tvSignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/inter_regular"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="@string/sign_in_text" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_border_selector"
-        android:hint="Email Address"
-        android:fontFamily="@font/inter_regular"
-        android:maxLength="50"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:focusable="true" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPassword"
-            android:hint="Enter Password"
-            android:background="@drawable/edittext_border_selector"
-            android:fontFamily="@font/inter_regular"
-            android:maxLength="15"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:focusable="true" />
-
-        <ImageView
-            android:id="@+id/eyeIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_eye"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginEnd="16dp" />
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:text="Sign Up"
-        android:textColor="@color/white"
-        android:fontFamily="@font/inter_semi_bold"
-        android:background="@drawable/button_color" />
-
-    <TextView
-        android:id="@+id/tvSignin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/inter_regular"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/sign_in_text" />
-</LinearLayout>
+</ScrollView>
