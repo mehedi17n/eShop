@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.loginResponse.collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {
-                        // Show loading state if needed
+
                     }
                     is Resource.Success -> {
                         Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
@@ -83,11 +83,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun togglePasswordVisibility() {
         if (isPasswordVisible) {
-            // Set the password to hidden
             passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             eyeIcon.setImageResource(R.drawable.ic_eye)
         } else {
-            // Set the password to visible
             passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             eyeIcon.setImageResource(R.drawable.ic_eye_off)
         }

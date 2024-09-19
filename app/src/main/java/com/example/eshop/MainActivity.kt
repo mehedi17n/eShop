@@ -9,17 +9,10 @@ import com.example.eshop.registation.RegisterActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var registerButton: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-//        registerButton = findViewById(R.id.registerButton)
-//
-//        registerButton.setOnClickListener {
-//            startActivity(Intent(this, RegisterActivity::class.java))
-//        }
     }
 }

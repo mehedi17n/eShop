@@ -4,7 +4,7 @@
         android:startColor="@color/startColor"
         android:endColor="@color/endColor">
     </gradient>
-<!--    <solid android:color="@color/primaryColor"/>-->
+
     <corners android:radius="32dp"></corners>
 
 </shape>

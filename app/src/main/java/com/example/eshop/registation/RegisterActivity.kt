@@ -68,7 +68,7 @@ class RegisterActivity : AppCompatActivity() {
             registerViewModel.registerResponse.collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {
-                        // Show loading state if needed
+
                     }
                     is Resource.Success -> {
                         Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
@@ -85,11 +85,9 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun togglePasswordVisibility() {
         if (isPasswordVisible) {
-            // Set the password to hidden
             passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             eyeIcon.setImageResource(R.drawable.ic_eye)
         } else {
-            // Set the password to visible
             passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             eyeIcon.setImageResource(R.drawable.ic_eye_off)
         }
@@ -107,7 +105,7 @@ class RegisterActivity : AppCompatActivity() {
         if (!isValidName(name)) {
             Toast.makeText(this, "Please enter a valid name", Toast.LENGTH_SHORT).show()
         } else if (!isValidPhone(phone)) {
-            Toast.makeText(this, "Phone number must start with '1'", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Phone number must start with '1' and 10 Digits", Toast.LENGTH_SHORT).show()
         } else if (!isValidEmail(email)) {
             Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
         } else if (!isValidPassword(password)) {

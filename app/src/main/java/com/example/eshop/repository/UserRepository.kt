@@ -16,29 +16,29 @@ class UserRepository(private val apiService: ApiService) {
 
     fun registerUser(request: RegisterRequest): Flow<Resource<RegisterResponse>> = flow {
         try {
-            emit(Resource.Loading()) // Emit loading state
-            val response = apiService.registerUser(request) // Make the network request
+            emit(Resource.Loading())
+            val response = apiService.registerUser(request)
             Log.d("Repository", response.toString())
 
-            emit(Resource.Success(response)) // Emit success with the response
+            emit(Resource.Success(response))
 
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "An error occurred")) // Emit error state
+            emit(Resource.Error(e.message ?: "An error occurred"))
         }
     }.flowOn(Dispatchers.IO)
 
 
     fun loginUser(request: LoginRequest): Flow<Resource<LoginResponse>> = flow {
         try {
-            emit(Resource.Loading()) // Emit loading state
+            emit(Resource.Loading())
 
-            val response = apiService.loginUser(request) // Make the network request
+            val response = apiService.loginUser(request)
             Log.d("Repository", response.toString())
 
-            emit(Resource.Success(response)) // Emit success with the response
+            emit(Resource.Success(response))
 
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "An unexpected error occurred")) // Emit error state
+            emit(Resource.Error(e.message ?: "An unexpected error occurred"))
         }
     }.flowOn(Dispatchers.IO)
 }
