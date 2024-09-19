@@ -14,12 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.eshop.R
 import com.example.eshop.viewModel.RegisterViewModel
-import com.example.eshop.viewModel.RegisterViewModelFactory
 import com.example.eshop.api.ApiClient
 import com.example.eshop.api.Resource
 import com.example.eshop.data.register.RegisterRequest
 import com.example.eshop.login.LoginActivity
 import com.example.eshop.repository.UserRepository
+import com.example.eshop.viewModel.LoginViewModel
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -39,9 +39,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val apiService = ApiClient.apiService
-        val userRepository = UserRepository(apiService)
-        val viewModelFactory = RegisterViewModelFactory(userRepository)
-        registerViewModel = ViewModelProvider(this, viewModelFactory).get(RegisterViewModel::class.java)
+        registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
         nameEditText = findViewById(R.id.etName)
         phoneEditText = findViewById(R.id.etPhone)

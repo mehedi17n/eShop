@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.security.crypto.datastore.preferences)
     implementation(libs.androidx.security.crypto.ktx)
 
+    implementation (libs.okhttp)
+
     implementation(libs.coil)
     implementation (libs.lottie)
     implementation (libs.shimmer)
@@ -65,6 +67,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

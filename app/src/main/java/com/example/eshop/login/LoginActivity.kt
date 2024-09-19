@@ -20,7 +20,6 @@ import com.example.eshop.data.login.LoginRequest
 import com.example.eshop.registation.RegisterActivity
 import com.example.eshop.repository.UserRepository
 import com.example.eshop.viewModel.LoginViewModel
-import com.example.eshop.viewModel.LoginViewModelFactory
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -40,8 +39,7 @@ class LoginActivity : AppCompatActivity() {
         // Initialize ViewModel
         val apiService = ApiClient.apiService
         val userRepository = UserRepository(apiService)
-        val viewModelFactory = LoginViewModelFactory(userRepository)
-        loginViewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         emailEditText = findViewById(R.id.etEmailLogin)
         passwordEditText = findViewById(R.id.etPasswordLogin)
