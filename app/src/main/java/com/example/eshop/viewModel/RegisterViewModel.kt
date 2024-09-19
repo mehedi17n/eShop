@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
 
-    // Exposed StateFlow for observing the registration response
     private val _registerResponse = MutableStateFlow<Resource<RegisterResponse>>(Resource.Loading())
     val registerResponse: StateFlow<Resource<RegisterResponse>> get() = _registerResponse
 

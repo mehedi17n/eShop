@@ -151,6 +151,7 @@
             android:gravity="center"
             android:padding="20dp"
             android:text="@string/sign_in_text" />
+
     </LinearLayout>
 
 </ScrollView>
