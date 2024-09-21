@@ -1,4 +1,4 @@
-package com.example.eshop.data.login
+package com.example.eshop.data.authentication.login
 
 data class User(
     val address: Any?,

@@ -1,14 +1,13 @@
-package com.example.eshop
+package com.example.eshop.ui.home
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.eshop.login.LoginActivity
-import com.example.eshop.registation.RegisterActivity
+import com.example.eshop.R
+import com.example.eshop.ui.auth.LoginActivity
+import com.example.eshop.ui.auth.RegisterActivity
 
 class WelcomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
