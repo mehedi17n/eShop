@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.eshop.R
 import com.example.eshop.ui.auth.LoginActivity
 import com.example.eshop.ui.home.MainActivity
+import com.example.eshop.ui.home.WelcomeActivity
 import com.example.eshop.viewModel.SplashViewModel
 import kotlinx.coroutines.launch
 
@@ -60,7 +61,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, WelcomeActivity::class.java)
         startActivity(intent)
         finish()
     }

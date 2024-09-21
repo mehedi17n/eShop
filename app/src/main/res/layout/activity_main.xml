@@ -1,10 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:background="@color/white"
     tools:context=".ui.home.MainActivity">
 
-</LinearLayout>
+    <!-- FrameLayout for Fragments -->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Floating Bottom Navigation Bar -->
+    <RelativeLayout
+        android:id="@+id/floatingNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/custom_nav_background"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Home Button -->
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:padding="9dp"
+            android:src="@drawable/ic_home_border"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Home" />
+
+        <!-- Search Button -->
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_search_border"
+            android:layout_toEndOf="@id/home"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="Search" />
+
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_add_border"
+            android:layout_toEndOf="@id/search"
+            android:layout_marginStart="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="Add" />
+
+        <!-- Profile Button -->
+        <ImageView
+            android:id="@+id/favourite"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_favorite_border"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/add"
+            android:layout_centerVertical="true"
+            android:contentDescription="Favourite" />
+
+        <!-- Cart Button -->
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="20dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_profile_border"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Profile" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

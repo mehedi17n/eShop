@@ -1,14 +1,24 @@
 package com.example.eshop.repository
 
-import android.util.Log
 import com.example.eshop.api.Resource
-import com.example.eshop.service.ProtectedService
+import com.example.eshop.data.categories.CategoryResponse
+import com.example.eshop.service.AuthService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class ProductRepo(private val api: ProtectedService) {
+class ProductRepo(private val api: AuthService) {
+
+    suspend fun getCategories(): Flow<Resource<CategoryResponse>> = flow {
+        try {
+            emit(Resource.Loading)
+            val response = api.getCategories()
+            emit(Resource.Success(response))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message ?: "Unknown Error"))
+        }
+    }.flowOn(Dispatchers.IO)
 
     suspend fun getProducts(): Flow<Resource<String>> = flow {
         try {
