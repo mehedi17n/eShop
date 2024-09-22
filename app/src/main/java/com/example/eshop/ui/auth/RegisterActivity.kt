@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.eshop.R
 import com.example.eshop.data.auth.register.RegistrationResponse
+import com.example.eshop.utils.Utility.isValidEmail
 import com.example.eshop.viewModel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -39,12 +40,10 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-
         //onclick Listeners
         optionLogin.setOnClickListener {
             navigateToLogin()
         }
-
 
         registerbtn.setOnClickListener {
             val name = userName.text.toString()
@@ -81,7 +80,6 @@ class RegisterActivity : AppCompatActivity() {
 
         }
     }
-
 
     private fun navigateToLogin(response: RegistrationResponse) {
         val intent = Intent(this, LoginActivity::class.java).apply {
@@ -134,7 +132,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // If all fields are valid, show success message
         if (isValid) {
-//             Clear the form fields
+            // Clear the form fields
             userName.text?.clear()
             phoneNumber.text?.clear()
             userEmail.text?.clear()
@@ -146,11 +144,6 @@ class RegisterActivity : AppCompatActivity() {
         }
         return false
     }
-
-
-        private fun isValidEmail(email: String): Boolean {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        }
 
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java)

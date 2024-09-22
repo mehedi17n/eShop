@@ -7,13 +7,16 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.eshop.R
+import com.example.eshop.datasource.DataStoreKeys
 import com.example.eshop.ui.home.MainActivity
 import com.example.eshop.viewModel.LoginViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -28,9 +31,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
+        // Initialize ViewModel
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        //referenece
+        // References
         userEmail = findViewById(R.id.etEmailLogin)
         userPassword = findViewById(R.id.etPasswordLogin)
         loginbtn = findViewById(R.id.loginButton)
@@ -42,24 +47,19 @@ class LoginActivity : AppCompatActivity() {
         // Observe StateFlows for changes
         observeViewModel()
 
-
-        //onclick Listeners
+        // OnClick Listeners
         optionRegister.setOnClickListener {
             navigateToRegistration()
         }
 
-
         loginbtn.setOnClickListener {
             viewModel.onCLickLogin(this)
         }
-
-
     }
-
 
     override fun onStart() {
         super.onStart()
-        // Set initial text for the email field
+        // Set initial text for the email and password fields
         userEmail.setText(viewModel.emailStateFlow.value)
         userPassword.setText(viewModel.passwordStateFlow.value)
     }
@@ -71,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onEmailChanged(s.toString())
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -81,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onPasswordChanged(s.toString())
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
     }
@@ -90,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.loginResponse.collect { response ->
                 if(response != null)
-                navigateToHome()
+                    navigateToHome()
             }
         }
     }

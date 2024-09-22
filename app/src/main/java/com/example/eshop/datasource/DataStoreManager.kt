@@ -1,6 +1,7 @@
 package com.example.eshop.datasource
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -8,11 +9,19 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.eshop.api.Resource
+import com.example.eshop.data.auth.login.LoginRequest
+import com.example.eshop.data.auth.login.LoginResponse
+import com.example.eshop.data.auth.register.CreateRegistration
+import com.example.eshop.data.auth.register.RegistrationResponse
+import com.example.eshop.service.AuthService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-// Define the DataStore as a singleton using an extension property on Context
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "MarketinoDataStore")
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "eShopDataStore")
 
 class DatastoreManager(private val context: Context) {
 
