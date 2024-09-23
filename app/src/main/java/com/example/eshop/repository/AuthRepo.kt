@@ -4,6 +4,8 @@ import android.util.Log
 import com.example.eshop.api.Resource
 import com.example.eshop.data.auth.login.LoginRequest
 import com.example.eshop.data.auth.login.LoginResponse
+import com.example.eshop.data.auth.logout.LogoutRequest
+import com.example.eshop.data.auth.logout.LogoutResponse
 import com.example.eshop.data.auth.register.CreateRegistration
 import com.example.eshop.data.auth.register.RegistrationResponse
 import com.example.eshop.service.AuthService
@@ -45,5 +47,4 @@ class AuthRepo(private val api: AuthService) {
             Log.d("Error", e.toString())
         }
     }.flowOn(Dispatchers.IO)
-
 }

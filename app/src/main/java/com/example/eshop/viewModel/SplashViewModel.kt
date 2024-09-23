@@ -3,6 +3,7 @@ package com.example.eshop.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.eshop.api.ProtectedApiClient
 import com.example.eshop.datasource.DataStoreKeys
 import com.example.eshop.datasource.DatastoreManager
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,10 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
             dataStoreManager.getString(DataStoreKeys.token, null)
                 .collect { token ->
                     tokenFlow.value = token  // Update the MutableStateFlow with token
+
+                    token?.let {
+                        ProtectedApiClient.updateToken(it)
+                    }
                 }
         }
     }

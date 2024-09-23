@@ -2,7 +2,10 @@ package com.example.eshop.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +18,7 @@ import com.example.eshop.R
 import com.example.eshop.data.auth.register.RegistrationResponse
 import com.example.eshop.utils.Utility.isValidEmail
 import com.example.eshop.viewModel.MainViewModel
+import com.example.eshop.viewModel.RegisterViewModel
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -23,7 +27,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var userEmail: EditText
     private lateinit var userPassword: EditText
     private lateinit var registerbtn: Button
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: RegisterViewModel
     private lateinit var optionLogin: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,118 +42,86 @@ class RegisterActivity : AppCompatActivity() {
         registerbtn = findViewById(R.id.registerButton)
         optionLogin = findViewById(R.id.tvSignin)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
-        //onclick Listeners
-        optionLogin.setOnClickListener {
-            navigateToLogin()
-        }
+        // Set up text watchers for email and password input
+        setupTextWatchers()
 
+
+        // Button clicked listener for Register
         registerbtn.setOnClickListener {
-            val name = userName.text.toString()
-            val phoneNo = phoneNumber.text.toString()
-            val email = userEmail.text.toString()
-            val password = userPassword.text.toString()
-
-            // Call the validation function
-            val valid = validateForm(name, phoneNo, email, password)
-            println("valid $valid")
-            if (valid) {
-                viewModel.onCreateAccount(name, phoneNo, email, password)
-
-                lifecycleScope.launch {
-                    viewModel.registrationResponse.collect { response ->
-                        println("response ${response}");
-                        if (response != null) {
-                            if (response.status == 200) {
-                                Toast.makeText(this@RegisterActivity, response.message, Toast.LENGTH_SHORT).show()
-                                Log.d("Registration", response.toString())
-                                navigateToLogin(response)
-                                finish()
-                            } else {
-                                Log.d("Registration 1", response.status.toString());
-
-                                Toast.makeText(this@RegisterActivity, response.message, Toast.LENGTH_SHORT).show()
-                            }
-
-                        }
-
-                    }
-                }
-            }
-
+            viewModel.onClickRegister(this)
+            // Observe StateFlows for changes
+            observeViewModel()
         }
     }
 
-    private fun navigateToLogin(response: RegistrationResponse) {
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            putExtra("REGISTER", response)
+    //    Implementations for rotate screen to set values
+    override fun onStart() {
+        super.onStart()
+        // Set initial text for the text fields
+        userName.setText(viewModel.nameStateFlow.value)
+        userEmail.setText(viewModel.emailStateFlow.value)
+        phoneNumber.setText(viewModel.phoneStateFlow.value)
+        userPassword.setText(viewModel.passwordStateFlow.value)
+    }
+
+    private fun setupTextWatchers() {
+
+        // UserName text watcher
+        userName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.onNameChanged(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Email text watcher
+        userEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.onEmailChanged(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // PhoneNO. text watcher
+        phoneNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.onPhoneNoChanged(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Password text watcher
+        userPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.onPasswordChanged(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+    }
+
+    private fun observeViewModel() {
+        // Get Registration Responses
+        lifecycleScope.launch {
+            viewModel.registrationResponse.collect { response ->
+                if (response != null) {
+                    navigateToLogin()
+                    Log.d("response", response.toString())
+                }
+            }
         }
+
+    }
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
 
         startActivity(intent)
         finish()
     }
-
-    private fun validateForm(
-        username: String,
-        phone: String,
-        email: String,
-        password: String
-    ): Boolean {
-        var isValid = true
-
-        // Validate username
-        if (username.isEmpty()) {
-            userName.error = "Please enter a username"
-            isValid = false
-        } else {
-            userName.error = null
-        }
-
-        // Validate phone number
-        if (phone.isEmpty() || phone.length != 10 || phone[0] != '1') {
-            phoneNumber.error = "Please enter a valid phone number"
-            isValid = false
-        } else {
-            phoneNumber.error = null
-        }
-
-        // Validate email
-        if (email.isEmpty() || !isValidEmail(email)) {
-            userEmail.error = "Please enter a valid email address"
-            isValid = false
-        } else {
-            userEmail.error = null
-        }
-
-        // Validate password
-        if (password.isEmpty() || password.length < 6) {
-            userPassword.error = "Password must be at least 6 characters"
-            isValid = false
-        } else {
-            userPassword.error = null
-        }
-
-        // If all fields are valid, show success message
-        if (isValid) {
-            // Clear the form fields
-            userName.text?.clear()
-            phoneNumber.text?.clear()
-            userEmail.text?.clear()
-            userPassword.text?.clear()
-            return true
-
-        } else {
-            Toast.makeText(this, "Please fill in all fields correctly!", Toast.LENGTH_SHORT).show()
-        }
-        return false
-    }
-
-    private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-    }
-
 }
-
-
