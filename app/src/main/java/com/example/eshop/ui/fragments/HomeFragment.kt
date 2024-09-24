@@ -1,6 +1,5 @@
 package com.example.eshop.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,19 +13,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eshop.R
 import com.example.eshop.category.CategoriesAdapter
-import com.example.eshop.category.CategoryDetailsActivity
-import com.example.eshop.data.products.Product
 import com.example.eshop.product.ProductAdapter
-import com.example.eshop.ui.home.ItemSpacingDecoration
 import com.example.eshop.viewModel.CategoryViewModel
 import com.example.eshop.viewModel.ProductViewModel
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
+    // Product and Category RecyclerViews and Adapters
     private lateinit var productsRecyclerView: RecyclerView
-    private lateinit var adapter: ProductAdapter
+    private lateinit var categoryRecyclerView: RecyclerView
+    private lateinit var productAdapter: ProductAdapter
+    private lateinit var categoryAdapter: CategoriesAdapter
+    private lateinit var progressBar: ProgressBar
+
+    // ViewModels
     private lateinit var productViewModel: ProductViewModel
+    private lateinit var categoryViewModel: CategoryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,32 +42,54 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize ViewModels
         productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
+        categoryViewModel = ViewModelProvider(this)[CategoryViewModel::class.java]
 
-
+        // Initialize Views
         productsRecyclerView = view.findViewById(R.id.productRecyclerView)
-
-
+        categoryRecyclerView = view.findViewById(R.id.categoryRecyclerView)
+        // Set Layout Managers
         productsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        // Initialize the adapter
-        adapter = ProductAdapter(emptyList())
+        // Initialize Adapters
+        productAdapter = ProductAdapter(emptyList())
+        categoryAdapter = CategoriesAdapter(emptyList()) { category ->
+            // Handle category click
+            Log.d("Category Clicked", category.toString())
+        }
 
-        // Set up RecyclerView
-        productsRecyclerView.adapter = adapter
+        // Set Adapters
+        productsRecyclerView.adapter = productAdapter
+        categoryRecyclerView.adapter = categoryAdapter
 
+        // Load data and observe ViewModels
+        loadProducts()
+        loadCategories()
+    }
 
+    private fun loadProducts() {
         lifecycleScope.launch {
             productViewModel.productResponseFlow.collect { response ->
                 Log.d("HomeFragment", response.toString())
                 val productList = response?.data?.data
-
                 if (productList != null) {
-                    adapter.updateList(productList)
+                    productAdapter.updateList(productList)
                 }
             }
         }
-
     }
 
+    private fun loadCategories() {
+        lifecycleScope.launch {
+            categoryViewModel.categoryResponseFlow.collect { response ->
+                Log.d("HomeFragment", response.toString())
+                val categoryList = response?.data
+                if (categoryList != null) {
+                    categoryAdapter.updateList(categoryList)
+                }
+            }
+        }
+    }
 }

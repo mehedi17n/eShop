@@ -51,24 +51,24 @@
         android:orientation="horizontal"
         android:layout_marginTop="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Sub Categories"
-            android:fontFamily="@font/inter_semi_bold"
-            android:textSize="16sp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Sub Categories"-->
+<!--            android:fontFamily="@font/inter_semi_bold"-->
+<!--            android:textSize="16sp" />-->
 
-        <ImageView
-            android:id="@+id/seeAllSubCategories"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_other"
-            android:tint="@color/primaryColor"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="end" />
+<!--        <ImageView-->
+<!--            android:id="@+id/seeAllSubCategories"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:src="@drawable/ic_other"-->
+<!--            android:tint="@color/primaryColor"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:layout_gravity="end" />-->
 
     </LinearLayout>
 

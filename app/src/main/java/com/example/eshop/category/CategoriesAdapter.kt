@@ -5,45 +5,60 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eshop.R
 import com.example.eshop.data.categories.Data
+import com.example.eshop.data.products.Product
 import java.util.Locale
 
 class CategoriesAdapter(
-    private var categoryList: List<Data>,
-    private val onCategoryClick: (Data) -> Unit
-) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+    private var categoryList: List<Data?>?,
+    private val onProductClick: (Product) -> Unit
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.categoryImage)
-        val textView: TextView = view.findViewById(R.id.categoryName)
+) :RecyclerView.Adapter<CategoriesAdapter.ParentViewHolder>() {
+
+    class ParentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var productsCategory: TextView = view.findViewById(R.id.categoryName)
+        var subItems: RecyclerView = view.findViewById(R.id.subItems)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentViewHolder {
+        var view =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_category, parent, false)
+        return ParentViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val category = categoryList[position]
+    override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
 
-        // Set up click listener for the category
-        holder.itemView.setOnClickListener {
-            onCategoryClick(category)
+        val category = categoryList?.get(position)
+
+        holder.productsCategory.text = category?.name?.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.ROOT
+            ) else it.toString()
         }
 
-        // Bind the data to the views
-        holder.textView.text = category.name // Directly access category name
-        // Set an icon based on the category if needed
-        // Example: holder.imageView.setImageResource(R.drawable.icon_for_category)
+        holder.subItems.layoutManager = LinearLayoutManager(holder.itemView.context, RecyclerView.HORIZONTAL,false)
+//        holder.subCategoryRecyclerView.layoutManager = GridLayoutManager(holder.itemView.context, 3)
+        holder.subItems.adapter = SubCategoryAdapter(category?.sub_categories, onProductClick)
+
+//        holder.apply {
+//            productsCategory.text = category.categoryName?.capitalize() ?:
+//            childRecyclerView.layoutManager = GridLayoutManager(holder.itemView.context, 3)
+//            childRecyclerView.adapter = ChildAdapter(category.productList)
+//        }
+
     }
 
-    override fun getItemCount(): Int = categoryList.size
+    override fun getItemCount(): Int {
+        return categoryList?.size ?: 0
+    }
 
-    // Method to update the list of categories (useful for refreshing the data)
-    fun updateCategories(newCategories: List<Data>) {
-        categoryList = newCategories
-        notifyDataSetChanged() // Notify the adapter to refresh the view
+    // Function to update the adapter with new data
+    fun updateList(response: List<Data?>?) {
+        categoryList = response
+        notifyDataSetChanged()
     }
 }
